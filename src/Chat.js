@@ -59,7 +59,7 @@ const Chat = () => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [socket]);
 
   const sendMessage = () => {
     // Emit a new message to the server
