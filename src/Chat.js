@@ -43,9 +43,9 @@ const Chat = () => {
       console.log("Disconnected from server");
     });
 
-    socket.on("connect_error", (err) => {
-      console.error("Connection error:", err);
-    });
+    // socket.on("connect_error", (err) => {
+    //   console.error("Connection error:", err);
+    // });
 
     socket.on("error", (err) => {
       console.error("Socket error:", err);
