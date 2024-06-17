@@ -35,6 +35,13 @@ const Chat = () => {
   const [inputMessage, setInputMessage] = useState("");
 
   useEffect(() => {
+    socket.on("connect_error", (err) => {
+      console.error("Connection error", err);
+    });
+    socket.on("connect", () => {
+      console.log("Connected to server");
+    });
+
     // Listen for new messages from the server
     socket.on("message", (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
