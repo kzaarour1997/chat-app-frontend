@@ -7,9 +7,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-// import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-// import Avatar from "@mui/material/Avatar";
 import Fab from "@mui/material/Fab";
 import SendIcon from "@mui/icons-material/Send";
 import io from "socket.io-client";
@@ -32,9 +30,9 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const socket = io("https://72e4-194-126-140-34.ngrok-free.app"); // Adjust the URL based on your server configuration
-  console.log(socket);
 
   useEffect(() => {
+    // Event listeners for socket.io events
     socket.on("connect", () => {
       console.log("Connected to server");
     });
@@ -43,15 +41,15 @@ const Chat = () => {
       console.log("Disconnected from server");
     });
 
-    // socket.on("connect_error", (err) => {
-    //   console.error("Connection error:", err);
-    // });
+    socket.on("connect_error", (err) => {
+      console.log("Connection error:", err);
+    });
 
     socket.on("error", (err) => {
       console.error("Socket error:", err);
     });
 
-    // Listen for new messages from the server
+    // Listen for incoming messages from the server
     socket.on("message", (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
