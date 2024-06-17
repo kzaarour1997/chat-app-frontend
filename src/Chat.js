@@ -28,7 +28,7 @@ const MessageArea = styled(List)({
   overflowY: "auto",
 });
 
-const socket = io("http://localhost:4000"); // Adjust the URL based on your server configuration
+const socket = io("https://72e4-194-126-140-34.ngrok-free.app"); // Adjust the URL based on your server configuration
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
