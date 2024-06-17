@@ -28,18 +28,27 @@ const MessageArea = styled(List)({
   overflowY: "auto",
 });
 
-const socket = io("https://72e4-194-126-140-34.ngrok-free.app"); // Adjust the URL based on your server configuration
-console.log(socket);
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
+  const socket = io("https://72e4-194-126-140-34.ngrok-free.app"); // Adjust the URL based on your server configuration
+  console.log(socket);
 
   useEffect(() => {
-    socket.on("connect_error", (err) => {
-      console.error("Connection error", err);
-    });
     socket.on("connect", () => {
       console.log("Connected to server");
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected from server");
+    });
+
+    socket.on("connect_error", (err) => {
+      console.error("Connection error:", err);
+    });
+
+    socket.on("error", (err) => {
+      console.error("Socket error:", err);
     });
 
     // Listen for new messages from the server
@@ -47,9 +56,8 @@ const Chat = () => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
-    // Clean up event listeners when the component unmounts
     return () => {
-      socket.off("message");
+      socket.disconnect();
     };
   }, []);
 
