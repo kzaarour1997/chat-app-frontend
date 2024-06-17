@@ -29,7 +29,7 @@ const MessageArea = styled(List)({
 });
 
 const socket = io("https://72e4-194-126-140-34.ngrok-free.app"); // Adjust the URL based on your server configuration
-
+console.log(socket);
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
